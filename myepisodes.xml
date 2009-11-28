@@ -122,6 +122,7 @@
 			html += "<a target='_blank' href='" + feed.URL + "'>Feed</a> has no entries.";
 		       
 		document.getElementById('content_div').innerHTML = html;
+		gadgets.window.adjustHeight();
 	  };
 	  
 	  gadgets.util.registerOnLoadHandler(getFeed);
