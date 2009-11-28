@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+  <ModulePrefs    title="My TV Guide" 
+				  title_url="http://www.myepisodes.com/" 
+				  description="A Personal TV Guide powered by http://www.myepisodes.com/. This gadget displays the showtimes for all of your favorite TV shows!" 
+				  render_inline="optional" 
+				  scrolling="true"
+				  screenshot="http://www.mash-it-up.ca/gmodules/Guide/screen.png"
+				  thumbnail="http://www.mash-it-up.ca/gmodules/Guide/logo.png"
+				  author="Jonathan Mash" 
+				  author_email="jonmash+GADGET@gmail.com" 
+				  author_photo="http://www.mash-it-up.ca/gmodules/Guide/author.png"
+				  author_affiliation="Mash-It-Up.ca" 
+				  author_location="Kingston, ON, Canada" 
+				  author_link="http://www.mash-it-up.ca" 
+				  author_aboutme="My name is Jonathan Mash. Born and raised near Toronto, I now live in Kingston, Ontario – the proud home of Queen’s University. I graduated with a Bachelor of Science in Electrical Engineering in June 2009 and have since been working my way through a Master’s of Applied Science. My specialty is Power Electronics but I have a special affinity for alternative energy systems. Please visit my blog at: http://www.mash-it-up.ca/ for more information."
+				  author_quote="Engineering… where the noble semiskilled laborers execute the vision of those who think and dream. Hello, Oompa-Loompas of science. - Sheldon, from “The Big Bang Theory” "
+				  category="tools" 
+				  singleton="false">
+    <Locale lang="en" />
+  </ModulePrefs>
+  <UserPref name="uid" display_name="Username" datatype="string" required="true"/>
+  <UserPref name="pwdmd5" display_name="MD5 Access Key" datatype="string" required="true"/>
+  <UserPref name="type" display_name="Content Type" datatype="enum" default_value="mylist">
+    <EnumValue value="all" display_value="All"/>
+    <EnumValue value="mylist" display_value="My List"/>
+    <EnumValue value="yesterday" display_value="Yesterday"/>
+    <EnumValue value="tomorrow" display_value="Tomorrow"/>
+    <EnumValue value="today" display_value="Today"/>
+    <EnumValue value="unacquired" display_value="Unacquired"/>
+  </UserPref>
+  <UserPref name="sort" display_name="Sort" datatype="enum" default_value="asc">
+    <EnumValue value="asc" display_value="Ascending"/>
+    <EnumValue value="desc" display_value="Descending"/>
+  </UserPref>
+  <UserPref name="showignored" display_name="Show Ignored Shows" datatype="bool" default_value="false"/>
+  <UserPref name="onlyunacquired" display_name="Show Only UnAcquired" datatype="bool" default_value="true"/>
+  <UserPref name="numentries" display_name="Number of Entries" datatype="enum" default_value="3">
+    <EnumValue value="1"/>
+    <EnumValue value="2"/>
+    <EnumValue value="3"/>
+    <EnumValue value="4"/>
+    <EnumValue value="5"/>
+    <EnumValue value="6"/>
+    <EnumValue value="7"/>
+    <EnumValue value="8"/>
+    <EnumValue value="9"/>
+    <EnumValue value="10"/>
+    <EnumValue value="11"/>
+    <EnumValue value="12"/>
+    <EnumValue value="13"/>
+    <EnumValue value="14"/>
+    <EnumValue value="15"/>			
+  </UserPref>
+  <Content type="html">
+    <![CDATA[
+	
+	
+    <div id="content_div"></div>
+	
+	
+	<style type="text/css">
+  	  #content_div { font-size: 80%;  margin: 5px; background-color: #FFFFEF;}
+      .fl__MODULE_ID__ {font-size: smaller; padding-top: 2px; padding-bottom: 2px;}
+	  a:link, a:visited {
+	  	color: #105CB6;
+		text-decoration: none;
+	  }
+	  a:hover, a:active {
+		color: #000;	
+	  }
+	  hr {
+	    border: 0;
+  		width: 80%;
+		color: #000;
+		background-color: #000;
+		height: 2px;
+	  }
+  </style>
+  
+  
+  
+  <script type="text/javascript">
+	  // Get userprefs
+	  var prefs = new gadgets.Prefs();
+	  document.getElementById('content_div').innerHTML = "Loading...";
+	  
+	  function getFeed() {  
+		var url = 'http://www.myepisodes.com/rss.php?uid=' + prefs.getString('uid');
+		url = url + '&pwdmd5=' + prefs.getString('pwdmd5');
+		url = url + '&feed=' + prefs.getString('type');
+		url = url + '&sort=' + prefs.getString('sort');
+		url = url + '&showignored=' + prefs.getString('showignored');
+		url = url + '&onlyunacquired=' + prefs.getString('onlyunacquired');
+	    
+		document.getElementById('content_div').innerHTML = "Getting Feed...<br>If this message persists, there is a problem contacting the RSS server at myepisodes.com. Check your username and MD5 password and try again.";
+		
+		var params = {};  
+		params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.FEED;  
+		params[gadgets.io.RequestParameters.NUM_ENTRIES] = new Number(prefs.getInt('numentries'));  
+		
+		gadgets.io.makeRequest(url, response, params);
+	  };
+	
+	  function response(obj) { 
+		// obj.data contains the feed data
+		var feed = obj.data;
+		var html = "";
+
+		// Access the data for a given entry
+		if (feed.Entry){
+		  for (var i = 0; i < feed.Entry.length; i++){
+		    var modTitle = feed.Entry[i].Title;
+			modTitle = modTitle.replace(/\x5D\x5B/g, "-"); //Filters out the [], [, and ]
+			modTitle = modTitle.replace(/\x5B/g, "");
+			modTitle = modTitle.replace(/\x5D/g, "");
+			html += "<div><a target='_blank' href='" + feed.Entry[i].Link + "'>"+ modTitle+"</a>";
+		  }
+		} 
+		else
+			html += "<a target='_blank' href='" + feed.URL + "'>Feed</a> has no entries.";
+		       
+		document.getElementById('content_div').innerHTML = html;
+	  };
+	  
+	  gadgets.util.registerOnLoadHandler(getFeed);
+  </script>
+    
+
+
+	]]>
+  </Content>
+</Module>
