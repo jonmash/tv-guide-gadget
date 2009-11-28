@@ -18,6 +18,7 @@
 				  category="tools" 
 				  singleton="false">
     <Locale lang="en" />
+	<Require feature="dynamic-height"/>
   </ModulePrefs>
   <UserPref name="uid" display_name="Username" datatype="string" required="true"/>
   <UserPref name="pwdmd5" display_name="MD5 Access Key" datatype="string" required="true"/>
