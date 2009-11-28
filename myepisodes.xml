@@ -5,7 +5,7 @@
 				  description="A Personal TV Guide powered by http://www.myepisodes.com/. This gadget displays the showtimes for all of your favorite TV shows!" 
 				  render_inline="optional" 
 				  scrolling="true"
-				  screenshot="http://tv-guide-gadget.googlecode.com/files/screen.png"
+				  screenshot="http://tv-guide-gadget.googlecode.com/files/screen-0.2.png"
 				  thumbnail="http://tv-guide-gadget.googlecode.com/files/logo.png"
 				  author="Jonathan Mash" 
 				  author_email="jonmash+GADGET@gmail.com" 
