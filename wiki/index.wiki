@@ -12,7 +12,7 @@ Using this gadget is simple.
  # Add all of your favorite TV shows.
  # Next, Make sure you are logged into your iGoogle homepage.
  # Click on this button:
-  * [http://fusion.google.com/add?source=atgs&moduleurl=http%3A//tv-guide-gadget.googlecode.com/files/my-tv-guide-0.5.xml http://buttons.googlesyndication.com/fusion/add.gif]
+  * [http://fusion.google.com/add?source=atgs&moduleurl=http%3A//tv-guide-gadget.googlecode.com/files/my-tv-guide-0.6.xml http://buttons.googlesyndication.com/fusion/add.gif]
  # Click "Add to Google"
  # Enter you username, and md5-password. Your MD5 password is *NOT* your normal password. To find your MD5 password, return to _myepisodes.com_. Once logged in, click on the _Profile_ tab and select the _Control Panel_ button. Copy the _Your MD5 hashed password:_ field and paste it into the iGoogle gadget.
  # You may customize the rest of the settings, but the default settings should work for most users.
