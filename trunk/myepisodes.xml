@@ -61,7 +61,7 @@
 	
 	
 	<style type="text/css">
-  	  #content_div { font-size: 80%;  margin: 5px; background-color: #FFFFEF;}
+  	  #content_div { font-size: 80%;  margin: 5px; background-color: #FFFFFF;}
       .fl__MODULE_ID__ {font-size: smaller; padding-top: 2px; padding-bottom: 2px;}
 	  a:link, a:visited {
 	  	color: #105CB6;
